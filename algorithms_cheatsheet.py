@@ -32,15 +32,17 @@ def selectionSort(arr):
     return newArr                         # it's why we using pop() method here!
 
 #                               ----------------------------------------- QUICK SORT -------------------------------------------------
+import random
+
 def quicksort(array):
     if len(array) < 2:
         return array
     else:
-        pivot = array[0]  # Опорный элемент
+        pivot = random.choice(array)  # Опорный элемент
         
         '''Опорный элемент массива, выбирается случайным или посередине массива т.к. в этом случае
         время выполнения составит O(n * log(n)) , а если брать первый элемент массива то это будет O(n^2)'''
         
-        less = [_ for _ in array[1:] if _ < pivot]  # Сортировка элементов меньших опорного
-        greater = [_ for _ in array[1:] if _ > pivot]  # Сортировка элементов больше опорного
+        less = [i for i in array if i < pivot]  # Сортировка элементов меньших опорного
+        greater = [i for i in array if i > pivot]  # Сортировка элементов больше опорного
         return quicksort(less) + [pivot] + quicksort(greater)  # Применяем рекурсивный вызов функции!
