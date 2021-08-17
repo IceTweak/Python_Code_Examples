@@ -14,7 +14,7 @@ def binary_search (lst, item):
     return None
 
 #                               ----------------------------------------- SELECTION SORT ---------------------------------------------
-# For the first wee need to find out a index of smallest value in the array
+# For the first time we need to find out a index of a smallest value in the array
 def find_smallest(arr):
     smallest = arr[0]
     smallest_index = 0
@@ -28,5 +28,17 @@ def selectionSort(arr):
     newArr = []
     for i in range(len(arr)):
         smallest = find_smallest(arr)
-        newArr.append(arr.pop(smallest))  # We need to get smallest value and delete it from original array,
-    return newArr                         # it's why we using str.pop() method here!
+        newArr.append(arr.pop(smallest))  # At this point we need to get smallest value and delete it from original array,
+    return newArr                         # it's why we using pop() method here!
+
+#                               ----------------------------------------- QUICK SORT -------------------------------------------------
+def quicksort(array):
+    if len(array) < 2:
+        return array
+    else:
+        pivot = array[0]  # Опорный элемент
+        '''Опорный элемент массива, выбирается случайным или посередине массива т.к. в этом случае
+        время выполнения составит O(n * log(n)) , а если брать первый элемент массива то это будет O(n^2)'''
+        less = [_ for _ in array[1:] if _ < pivot]  # Сортировка элементов меньших опорного
+        greater = [_ for _ in array[1:] if _ > pivot]  # Сортировка элементов больше опорного
+        return quicksort(less) + [pivot] + quicksort(greater)  # Применяем рекурсивный вызов функции!
