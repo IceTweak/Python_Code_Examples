@@ -46,3 +46,38 @@ def quicksort(array):
         less = [i for i in array if i < pivot]  # Сортировка элементов меньших опорного
         greater = [i for i in array if i > pivot]  # Сортировка элементов больше опорного
         return quicksort(less) + [pivot] + quicksort(greater)  # Применяем рекурсивный вызов функции!
+   
+#                               ----------------------------------------- BREADTH FIRST SEARCH -------------------------------------------------
+
+from collections import deque
+
+
+def some_condition():  # function that we want to perform with our graph
+    pass  # should return True or False
+
+
+graph = {}  # creates a graph
+"""
+Our graph looks like:
+{I'm : [friend_1, friend_2, friend_3]
+friend_1 : [friend_of_friend_1]
+friend_2 : [friend_of_friend_2]
+...}
+"""
+
+
+def breadth_first_search(name):
+    search_queue = deque()  # creates deque to collect names in queue
+    search_queue += graph[name]
+    searched = []  # list of elements that have been searched
+    while search_queue:
+        deque_element = search_queue.popleft()  # takes left element from queue
+        if deque_element not in searched:
+            if some_condition():
+                print(deque_element)
+                return True
+            else:
+                search_queue += graph[deque_element]  # appends the next level elements to queue
+                searched.append(deque_element)  # appends element to searched list
+        return False
+    
