@@ -91,13 +91,13 @@ graph['start'] = {}
 # add weights
 graph['start']['a'] = 6
 graph['start']['b'] = 2
-# let's include nodes and their neighbours
+# let's include nodes and their neighbors
 graph['a'] = {}
 graph['a']['fin'] = 1
 graph['b'] = {}
 graph['b']['a'] = 3
 graph['b']['fin'] = 5
-# the finaly node hasn't neighbours
+# the finaly node hasn't neighbors
 graph['fin'] = {}
 
 # Now we need to create dict for the costs(weights)
@@ -105,7 +105,7 @@ infinity = float('inf')
 costs = {}
 costs['a'] = 6
 costs['b'] = 2
-costs['fin'] = infinity  # infinity is used because we don't know how node with each weight we need to get to the final
+costs['fin'] = infinity  # infinity is used because we don't know which node with its the weight we need to get to the final
 
 # And we create dict for the parents
 parents = {}
@@ -123,17 +123,17 @@ def find_lowest_cost_node(costs):
     lowest_cost_node = None
     for node in costs:  # loop over all nodes 
         cost = costs[node]
-        if cost < lowest_cost and not in processed:  # if node with smallest cost and not processed yet
+        if cost < lowest_cost and not in processed:  # if a node with the smallest cost and not processed
             lowest_cost = cost  # it wiil come new node with lowest cost
             lowest_cost_node = node
     return lowest_cost_node
 
-node = find_lowest_cost_node(costs)  # find a node with lower cost in not proceesed
-while node is not None:  # if now we get a finaly node
+node = find_lowest_cost_node(costs)  # find a node with the lowest cost in not proceesed
+while node is not None:  # None means that we have got to the finaly node
     cost = costs[node]
-    neighbours = graph[node]
-    for n in neighbours.keys():  # looping over all neighbours of node
-        new_cost = cost + neighbours[n]
+    neighbors = graph[node]
+    for n in neighbors.keys():  # looping over all neighbors of node
+        new_cost = cost + neighbors[n]
         if costs[n] > new_cost:  # if neigbour can be reached faster from this node
             costs[n] = new_cost  # refresh cost of this node
             parents[n] = node  # node comes a parent for his neighbour
