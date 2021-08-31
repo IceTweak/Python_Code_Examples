@@ -49,6 +49,7 @@ def quicksort(array):
    
 #                               ----------------------------------------- BREADTH FIRST SEARCH -------------------------------------------------
 
+'''The algorithm calculates the shortest path in a unweighted graph'''
 from collections import deque
 
 
@@ -83,6 +84,7 @@ def breadth_first_search(name):
     
 #                               ----------------------------------------- Dejkstra algorithm -------------------------------------------------
 
+'''The algorithm calculates the shortest path in a weighted graph'''
 # Imagine that we have simple weighted graph with two nodes A and B and weights 6 and 2. 
 # Also graph has a finally node (fin variable).
 graph = {}
