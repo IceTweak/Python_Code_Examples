@@ -81,3 +81,61 @@ def breadth_first_search(name):
                 searched.append(deque_element)  # appends element to searched list
         return False
     
+#                               ----------------------------------------- Dejkstra algorithm -------------------------------------------------
+
+# Imagine that we have simple weighted graph with two nodes A and B and weights 6 and 2. 
+# Also graph has a finally node (fin variable).
+graph = {}
+# init a hash-table(dict) inside graph to collect weights and nodes names
+graph['start'] = {}
+# add weights
+graph['start']['a'] = 6
+graph['start']['b'] = 2
+# let's include nodes and their neighbours
+graph['a'] = {}
+graph['a']['fin'] = 1
+graph['b'] = {}
+graph['b']['a'] = 3
+graph['b']['fin'] = 5
+# the finaly node hasn't neighbours
+graph['fin'] = {}
+
+# Now we need to create dict for the costs(weights)
+infinity = float('inf')
+costs = {}
+costs['a'] = 6
+costs['b'] = 2
+costs['fin'] = infinity  # infinity is used because we don't know how node with each weight we need to get to the final
+
+# And we create dict for the parents
+parents = {}
+parents['a'] = 'start'
+parents['b'] = 'start'
+parents['fin'] = None
+
+# We don't need to process node more than once and we create a list of processed nodes
+processed = []
+
+
+# Write a function to find lowest cost node
+def find_lowest_cost_node(costs):
+    lowest_cost = float('inf')
+    lowest_cost_node = None
+    for node in costs:  # loop over all nodes 
+        cost = costs[node]
+        if cost < lowest_cost and not in processed:  # if node with smallest cost and not processed yet
+            lowest_cost = cost  # it wiil come new node with lowest cost
+            lowest_cost_node = node
+    return lowest_cost_node
+
+node = find_lowest_cost_node(costs)  # find a node with lower cost in not proceesed
+while node is not None:  # if now we get a finaly node
+    cost = costs[node]
+    neighbours = graph[node]
+    for n in neighbours.keys():  # looping over all neighbours of node
+        new_cost = cost + neighbours[n]
+        if costs[n] > new_cost:  # if neigbour can be reached faster from this node
+            costs[n] = new_cost  # refresh cost of this node
+            parents[n] = node  # node comes a parent for his neighbour
+    processed.append(node)  # node markes as processed
+    node = find_lowest_cost_node(costs)  # repeat -->
